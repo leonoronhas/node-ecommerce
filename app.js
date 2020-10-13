@@ -1,5 +1,5 @@
 const path = require("path");
-
+const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localhost:5000
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -53,7 +53,7 @@ mongoose
         user.save();
       }
     });
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log(`DB is running on port 3000`);
     });
   })
