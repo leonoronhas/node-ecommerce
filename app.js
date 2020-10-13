@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localh
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 require("dotenv/config");
 
@@ -32,7 +33,12 @@ app.use((req, res, next) => {
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
-app.use(errorController.get404);
+const corsOptions = {
+  origin: "https://e-commerce-node-example.herokuapp.com/",
+  optionsSuccessStatus: 200,
+};
+
+app.use(errorController.get404).use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGODB_URL, {
