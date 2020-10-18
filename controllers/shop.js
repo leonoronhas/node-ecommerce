@@ -8,7 +8,8 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
-        path: '/products'
+        path: '/products',
+        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch(err => {
@@ -23,12 +24,14 @@ exports.getProduct = (req, res, next) => {
       res.render('shop/product-detail', {
         product: product,
         pageTitle: product.title,
-        path: '/products'
+        path: '/products',
+        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch(err => console.log(err));
 };
 
+// Home page handler
 exports.getIndex = (req, res, next) => {
   Product.find()
     .then(products => {
@@ -52,7 +55,8 @@ exports.getCart = (req, res, next) => {
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
-        products: products
+        products: products,
+        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch(err => console.log(err));
@@ -90,7 +94,7 @@ exports.postOrder = (req, res, next) => {
       });
       const order = new Order({
         user: {
-          name: req.user.name,
+          email: req.user.email,
           userId: req.user
         },
         products: products
@@ -112,7 +116,8 @@ exports.getOrders = (req, res, next) => {
       res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders',
-        orders: orders
+        orders: orders,
+        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch(err => console.log(err));
