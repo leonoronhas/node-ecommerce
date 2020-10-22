@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport(
 );
 
 // Link to reset password
-const LINK = process.env.LINK || process.env.URL_LINK;
+const LINK = process.env.URL_HEROKU || process.env.URL_LINK;
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error"); // Pull key set in line 62
