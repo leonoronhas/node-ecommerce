@@ -236,7 +236,7 @@ form {
 
 .user-message--error {
   border-color: red;
-  background-color: gainsboro;
+  background-color:black;
   color: red;
 }
 
