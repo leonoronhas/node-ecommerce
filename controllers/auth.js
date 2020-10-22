@@ -10,13 +10,13 @@ const User = require("../models/user");
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key: process.env.API_TRANSPORT,
+      api_key: process.env.SENDGRID_KEY,
     },
   })
 );
 
 // Link to reset password
-const LINK = process.env.URL_HEROKU || process.env.URL_LINK;
+const LINK = process.env.LINK || process.env.URL_LINK;
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error"); // Pull key set in line 62
