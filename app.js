@@ -3,9 +3,9 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const csrf = require('csurf');
+const csrf = require("csurf");
 const cors = require("cors");
-const flash = require('connect-flash'); // special area of the session used for storing messages
+const flash = require("connect-flash"); // special area of the session used for storing messages
 const MongoDBStore = require("connect-mongodb-session")(session); // Do not forget to pass your session
 
 require("dotenv/config");
@@ -57,10 +57,15 @@ app.use((req, res, next) => {
   }
   User.findById(req.session.user._id)
     .then((user) => {
+      if (!user) {
+        return next();
+      }
       req.user = user;
       next();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      throw new Error(err);
+    });
 });
 
 /* Tell express to load this for every view EXPRESS LOCALS
@@ -89,6 +94,9 @@ const corsOptions = {
 
 // 404 handler
 app.use(errorController.get404).use(cors(corsOptions));
+// 500 handler
+app.get('/500', errorController.get500).use(cors(corsOptions));
+
 
 // Connect to DB
 mongoose
