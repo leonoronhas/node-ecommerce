@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 main {
@@ -59,7 +59,6 @@ form {
   margin: 0 1rem;
   padding: 0;
 }
-
 .main-header__item a {
   text-decoration: none;
   color: white;
@@ -68,6 +67,22 @@ form {
 .main-header__item a:hover,
 .main-header__item a:active,
 .main-header__item a.active {
+  color: #ffeb3b;
+}
+.main-header__item2 {
+  margin-left: 5rem;
+  padding: 0;
+
+}
+
+.main-header__item2 a {
+  text-decoration: none;
+  color: white;
+}
+
+.main-header__item2 a:hover,
+.main-header__item2 a:active,
+.main-header__item2 a.active {
   color: #ffeb3b;
 }
 
@@ -196,8 +211,8 @@ form {
   padding: 0.25rem 1rem;
   text-decoration: none;
   font: inherit;
-  border: 1px solid #00695c;
-  color: #00695c;
+  border: 2px solid black;
+  color: black;
   background: white;
   border-radius: 3px;
   cursor: pointer;
@@ -205,8 +220,8 @@ form {
 
 .btn:hover,
 .btn:active {
-  background-color: #00695c;
-  color: white;
+  background-color: yellow;
+  color: black;
 }
 
 .btn.danger {

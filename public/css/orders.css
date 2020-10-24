@@ -11,8 +11,11 @@
 
 .orders__item {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
+  padding: 1.5rem;
+  margin: auto;
   margin-bottom: 1rem;
+  border: 1px solid black;
+  width: 40%;
 }
 
 .orders__products {
@@ -24,6 +27,7 @@
 .orders__products-item {
     margin: 0.5rem 0;
     padding: 0.5rem;
-    border: 1px solid #00695c;
-    color: #00695c;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
 }
