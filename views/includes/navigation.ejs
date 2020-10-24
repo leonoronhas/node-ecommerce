@@ -4,34 +4,34 @@
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
       <li class="main-header__item">
-        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+        <a class="<%= path === '/' ? 'active' : '' %>" href="/">SHOP</a>
       </li>
       <li class="main-header__item">
         <a class="<%= path === '/products' ? 'active' : '' %>" href="/products"
-          >Products</a
+          >PRODUCTS</a
         >
       </li>
       <% if (isAuthenticated) { %>
       <li class="main-header__item">
-        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">CART</a>
       </li>
       <li class="main-header__item">
         <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
-          >Orders</a
+          >ORDERS</a
         >
       </li>
-      <li class="main-header__item">
+      <li class="main-header__item2">
         <a
           class="<%= path === '/admin/add-product' ? 'active' : '' %>"
           href="/admin/add-product"
-          >Add Product
+          >ADD PRODUCT
         </a>
       </li>
       <li class="main-header__item">
         <a
           class="<%= path === '/admin/products' ? 'active' : '' %>"
           href="/admin/products"
-          >Admin Products
+          >ADMIN
         </a>
       </li>
       <% } %>
@@ -54,7 +54,7 @@
           <!-- Do not forget to add the token and the name "_csrf"-->
           <!-- THE NAME MUST BE "_csrf"-->
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <button type="submit">Logout</button>
+            <button class="btn" type="submit">Logout</button>
         </form>
       </li>
       <% } %>
@@ -65,34 +65,34 @@
 <nav class="mobile-nav">
   <ul class="mobile-nav__item-list">
     <li class="mobile-nav__item">
-      <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+      <a class="<%= path === '/' ? 'active' : '' %>" href="/">SHOP</a>
     </li>
     <li class="mobile-nav__item">
       <a class="<%= path === '/products' ? 'active' : '' %>" href="/products"
-        >Products</a
+        >PRODUCTS</a
       >
     </li>
     <% if (isAuthenticated) { %>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+      <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">CART</a>
     </li>
     <li class="mobile-nav__item">
       <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
-        >Orders</a
+        >ORDERS</a
       >
     </li>
     <li class="mobile-nav__item">
       <a
         class="<%= path === '/admin/add-product' ? 'active' : '' %>"
         href="/admin/add-product"
-        >Add Product
+        >ADD PRODUCT
       </a>
     </li>
     <li class="mobile-nav__item">
       <a
         class="<%= path === '/admin/products' ? 'active' : '' %>"
         href="/admin/products"
-        >Admin Products
+        >ADMIN
       </a>
     </li>
     <% } %> <% if (!isAuthenticated) { %>
