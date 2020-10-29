@@ -18,10 +18,7 @@ router.post(
       .isEmail()
       .withMessage("Please enter a valid email!")
       .normalizeEmail(),
-    body(
-      "password",
-      "Password must have 5 digits minimum and be alphanumeric"
-    )
+    body("password", "Password must have 5 digits minimum and be alphanumeric")
       .isLength({ min: 5 })
       .isAlphanumeric()
       .trim(),
@@ -32,37 +29,34 @@ router.post(
 router.post(
   "/signup",
   [
-    // Email validator
     check("email")
       .isEmail()
-      .withMessage("Please enter a valid email!")
+      .withMessage("Please enter a valid email.")
       .custom((value, { req }) => {
         return User.findOne({ email: value }).then((userDoc) => {
           if (userDoc) {
             return Promise.reject(
-              "Email already in use, please login or sign up with another email"
+              "E-Mail exists already, please pick a different one."
             );
           }
         });
       })
-      .normalizeEmail() // will save it with everything lowercase
-      .trim(),
-    // Password validator / If second param is provided it is the default message for all errors
+      .normalizeEmail(),
     body(
       "password",
-      "Password must have 5 digits minimum and be alphanumeric"
+      "Please enter a password with only numbers and text and at least 5 characters."
     )
       .isLength({ min: 5 })
       .isAlphanumeric()
       .trim(),
-    // Confirm password validator
     body("confirmPassword")
+      .trim()
       .custom((value, { req }) => {
         if (value !== req.body.password) {
           throw new Error("Passwords must match!");
         }
-      })
-      .trim(),
+        return true;
+      }),
   ],
   authController.postSignup
 );
