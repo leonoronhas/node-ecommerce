@@ -23,7 +23,6 @@ router.post(
       .isLength({ min: 5 })
       .isString()
       .trim(),
-    body("imageUrl", "Image url is required and it must be valid").isURL(),
     body("price", "Price is required and should be numeric").isNumeric(),
     body("description", "Description is required with at least 10 characters")
       .isLength({ min: 10 })
@@ -42,7 +41,6 @@ router.post(
       .isLength({ min: 5 })
       .isString()
       .trim(),
-    body("imageUrl", "Image url is required and it must be valid").isURL(),
     body("price", "Price is required and should be numeric").isNumeric(),
     body("description", "Description is required with at least 10 characters")
       .isLength({ min: 10 })

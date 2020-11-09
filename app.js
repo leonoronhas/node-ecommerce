@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const multer = require("multer");
 const csrf = require("csurf");
 const cors = require("cors");
 const flash = require("connect-flash"); // special area of the session used for storing messages
@@ -23,6 +24,31 @@ const store = new MongoDBStore({
 // CSRF - Cross Site Request Forgery
 const csrfProtection = csrf();
 
+// Constant to handle the file upload naming
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      new Date().toISOString().replace(/:/g, ".") + "-" + file.originalname
+    );
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 // Template engine EJS
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -34,7 +60,13 @@ const shopRoutes = require("./routes/shop");
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+); // For file uploads, make sure to update the view and form. The input should have a name id that matches the param in single();
+
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images"))); // So we can retrieve the images from the DB and display them
+
 // Session saved in DB to handle multiple users with hashed cookie
 app.use(
   session({
@@ -95,8 +127,7 @@ const corsOptions = {
 // 404 handler
 app.use(errorController.get404).use(cors(corsOptions));
 // 500 handler
-app.get('/500', errorController.get500).use(cors(corsOptions));
-
+app.get("/500", errorController.get500).use(cors(corsOptions));
 
 // Connect to DB
 mongoose
