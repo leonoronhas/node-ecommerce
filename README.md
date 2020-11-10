@@ -6,6 +6,23 @@ I decided to build this project to learn more about Nodejs and practice all the 
 ### Lastest Version
 To check the project in real-time, please go to https://e-commerce-node-example.herokuapp.com/
 
+### Features
+* User Authentication
+* Email sending
+* Sessions
+* Protected Routes
+* CSRF protection
+* MongoDB NoSQL Database
+* Payment method
+* Order Invoices
+* PDF generator
+* CRUD operations for products
+* Input Validation
+* Error handling
+* Encryption
+* File Upload
+* MVC pattern
+
 ### Technologies
 
 Dependency | Description
@@ -23,3 +40,7 @@ Dependency | Description
 [EJS](https://ejs.co/) | Embedded JavaScript templating - NodeJS templating engine
 [Connect-mongodb-session](https://github.com/mongodb-js/connect-mongodb-session#readme) | MongoDB-backed session storage for connect and Express.
 [Connect-flash](https://github.com/jaredhanson/connect-flash#readme) | The flash is a special area of the session used for storing messages. Messages are written to the flash and cleared after being displayed to the user. The flash is typically used in combination with redirects, ensuring that the message is available to the next page that is to be rendered.
+[Multer](https://github.com/expressjs/multer) | Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+[Nodemailer](https://nodemailer.com/about/) | Nodemailer is a module for Node.js applications to allow easy as cake email sending.
+[PDFKit](https://pdfkit.org/) | PDFKit is a PDF document generation library for Node and the browser that makes creating complex, multi-page, printable documents easy.
+[Stripe](https://stripe.com/) | A fully integrated suite of payments products
