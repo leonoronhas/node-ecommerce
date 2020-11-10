@@ -23,12 +23,11 @@
                 </ul>
                 <hr>
                 <div class="centered">
-                    <form action="/create-order" method="POST">
-                        <!-- Do not forget to add the token and the name "_csrf"-->
-                        <!-- THE NAME MUST BE "_csrf"-->
+                   <!--<form action="/create-order" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                         <button type="submit" class="btn">Order Now!</button>
-                    </form>
+                    </form>-->
+                    <a class="btn" href="/checkout">Order</a>
                 </div>
                 
             <% } else { %>
