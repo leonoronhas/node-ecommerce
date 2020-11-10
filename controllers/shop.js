@@ -4,6 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const PDFDocument = require("pdfkit");
 
+const ITEMS_PER_PAGE = 2;
+
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then((products) => {
@@ -12,7 +14,6 @@ exports.getProducts = (req, res, next) => {
         prods: products,
         pageTitle: "All Products",
         path: "/products",
-        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch((err) => {
@@ -28,7 +29,6 @@ exports.getProduct = (req, res, next) => {
         product: product,
         pageTitle: product.title,
         path: "/products",
-        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch((err) => console.log(err));
@@ -36,12 +36,27 @@ exports.getProduct = (req, res, next) => {
 
 // Home page handler
 exports.getIndex = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalItems = 0;
   Product.find()
+    .countDocuments()
+    .then((numProducts) => {
+      totalItems = numProducts;
+      return Product.find()
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
     .then((products) => {
       res.render("shop/index", {
         prods: products,
         pageTitle: "Shop",
         path: "/",
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
       });
     })
     .catch((err) => {
@@ -59,7 +74,6 @@ exports.getCart = (req, res, next) => {
         path: "/cart",
         pageTitle: "Your Cart",
         products: products,
-        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch((err) => console.log(err));
@@ -120,7 +134,6 @@ exports.getOrders = (req, res, next) => {
         path: "/orders",
         pageTitle: "Your Orders",
         orders: orders,
-        // isAuthenticated: req.session.isLoggedIn no need for this, check app.js line 70
       });
     })
     .catch((err) => console.log(err));
